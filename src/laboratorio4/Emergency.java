@@ -31,7 +31,7 @@ public class Emergency {
 
 	public boolean removeFromQueue(String name) {
 		for (Patient patient : patients) {
-			if (patient.getName().equals(name)) {
+			if (patient.getName().equalsIgnoreCase(name)) {
 				patients.remove(patient);
 				return true;
 			}

@@ -12,18 +12,18 @@ public class EmergencyIU {
 
 	public void printPatients() {
 		System.out.println("Patients in the queue:");
-		System.out.println("Name:   Age:");
+		System.out.printf("\n%-20s   Age:\n","Name:");
 		for (Patient patient : emergency.getPatients()) {
-			System.out.printf("%s    %d\n", patient.getName(), patient.getAge());
+			System.out.printf("%-20s    %d\n", patient.getName(), patient.getAge());
 		}
 		System.out.println();
 	}
 
 	public void printVaccinated() {
 		System.out.println("Patients vaccinated:");
-		System.out.println("Name:   Age:");
+		System.out.printf("\n%-20s   Age:\n","Name:");
 		for (Patient patient : emergency.getVaccinated()) {
-			System.out.printf("%s    %d\n", patient.getName(), patient.getAge());
+			System.out.printf("%-20s    %d\n", patient.getName(), patient.getAge());
 		}
 		System.out.println();
 	}
@@ -31,7 +31,7 @@ public class EmergencyIU {
 	private boolean checkValidName(String name) {
 		if (name.matches(".*\\d.*"))
 			return false;
-		if (name.length() < 3)
+		if (name.length() < 3 || name.length()>20)
 			return false;
 		return true;
 	}
@@ -81,24 +81,26 @@ public class EmergencyIU {
 		if (emergency.removePatient())
 			System.out.println("Next patient called successfully!");
 		else
-			System.out.println("The queue is already empty!");
-		System.out.println();
+			System.out.println("The queue is empty!");
 	}
 
 	public void removePatient() {
-		System.out.println("Insert the name to remove:");
-		String name = null;
-		while (name == null || !checkValidName(name)) {
-			if (sc.hasNextLine()) {
-				name = sc.next();
-				sc.nextLine();
-			} else
-				System.out.println("Invalid name, try again:");
-		}
-		if (emergency.removeFromQueue(name))
-			System.out.println("Patient successfully removed from queue!");
-		else
-			System.out.println("Patient not found!");
-		System.out.println();
+		if(!emergency.getPatients().isEmpty()) {
+			System.out.println("Insert the name to remove:");
+			String name = null;
+			while (name == null || !checkValidName(name)) {
+				if (sc.hasNextLine()) {
+					name = sc.next();
+					sc.nextLine();
+				} else
+					System.out.println("Invalid name, try again:");
+			}
+			if (emergency.removeFromQueue(name))
+				System.out.println("Patient successfully removed from queue!");
+			else
+				System.out.println("Patient not found!");
+			System.out.println();
+		}else
+			System.out.println("The queue is empty!");
 	}
 }
