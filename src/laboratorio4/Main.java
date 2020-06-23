@@ -1,5 +1,6 @@
 package laboratorio4;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -17,8 +18,17 @@ public class Main {
 			System.out.println("4 - See list of vaccinateds:");
 			System.out.println("5 - See current queue:");
 			System.out.println("0 - Close:");
-
-			option = sc.nextInt();
+			
+			boolean validOption = false;
+			while(!validOption) {
+				try {
+					option = sc.nextInt();
+					validOption = true;
+				} catch (InputMismatchException e) {
+					System.out.println("Invalid Option!");
+					sc.nextLine();
+				}
+			}
 
 			if (option == 1)
 				emergencyIU.addPatient();
@@ -34,10 +44,9 @@ public class Main {
 
 			else if (option == 5)
 				emergencyIU.printPatients();
-			
-			else if(option!=0)
-				System.out.printf("\nINVALID OPTION!\n");
 
+			else if (option != 0)
+				System.out.printf("\nInvalid Option!\n");
 
 		} while (option != 0);
 		sc.close();

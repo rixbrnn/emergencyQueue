@@ -74,7 +74,6 @@ public class EmergencyIU {
 		patient = new Patient(name, age);
 		emergency.addPatient(patient);
 		System.out.println("Patient successfully added to the queue!");
-		System.out.println();
 	}
 
 	public void callPatient() {
@@ -87,19 +86,15 @@ public class EmergencyIU {
 	public void removePatient() {
 		if(!emergency.getPatients().isEmpty()) {
 			System.out.println("Insert the name to remove:");
-			String name = null;
-			while (name == null || !checkValidName(name)) {
-				if (sc.hasNextLine()) {
-					name = sc.next();
-					sc.nextLine();
-				} else
-					System.out.println("Invalid name, try again:");
+			String name = sc.nextLine();
+			while (!checkValidName(name)) {
+					System.out.println("Patient not found!");
+					return;
 			}
 			if (emergency.removeFromQueue(name))
 				System.out.println("Patient successfully removed from queue!");
 			else
 				System.out.println("Patient not found!");
-			System.out.println();
 		}else
 			System.out.println("The queue is empty!");
 	}

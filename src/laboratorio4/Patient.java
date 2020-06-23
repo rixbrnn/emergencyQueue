@@ -1,6 +1,6 @@
 package laboratorio4;
 
-public class Patient{
+public class Patient implements Comparable<Patient>{
 	private String name;
 	private int age;
 	
@@ -18,6 +18,16 @@ public class Patient{
 	public int getAge()
 	{
 		return age;
+	}
+
+	@Override
+	public int compareTo(Patient o) {
+		if (this.getAge() > o.getAge())
+			return -1;
+		if (this.getAge() < o.getAge())
+			return 1;
+		else
+			return 0;
 	}
 
 }

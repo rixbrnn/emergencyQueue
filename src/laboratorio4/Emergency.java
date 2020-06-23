@@ -1,12 +1,13 @@
 package laboratorio4;
 
-import java.util.Collections;
+//import java.util.Collections;
 import java.util.LinkedList;
+import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class Emergency {
-	private PatientComparator comparator = new PatientComparator();
-	private LinkedList<Patient> patients = new LinkedList<>();
+	//private PatientComparator comparator = new PatientComparator();
+	private PriorityQueue<Patient> patients = new PriorityQueue<>();
 	private LinkedList<Patient> vaccinated = new LinkedList<>();
 
 	public Queue<Patient> getPatients() {
@@ -19,13 +20,13 @@ public class Emergency {
 
 	public void addPatient(Patient patient) {
 		patients.add(patient);
-		Collections.sort(patients, comparator);
+		//Collections.sort(patients, comparator);
 	}
 
 	public boolean removePatient() {
 		if (patients.isEmpty())
 			return false;
-		vaccinated.addLast(patients.remove());
+		vaccinated.addLast(patients.poll());
 		return true;
 	}
 
